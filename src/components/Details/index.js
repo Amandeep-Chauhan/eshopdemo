@@ -1,9 +1,14 @@
+'use client';
+
 import React from 'react'
+import useGetDetails from './hooks/useGetDetails';
 
 const Details = () => {
-  return (
-    <div>Details</div>
-  )
+    const { data }= useGetDetails();
+
+    return (
+        <div>Details</div>
+    )
 }
 
 export default Details
