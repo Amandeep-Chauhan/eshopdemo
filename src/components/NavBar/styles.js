@@ -1,11 +1,13 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+    position: relative;
     width: 100%;
     background-color: #fff;
-	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
+	box-shadow: 8px 8px 14px rgb(98 127 172 / 20%);
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 20px 60px;
+    z-index: 999;
 `;

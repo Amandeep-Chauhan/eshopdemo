@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react'
+import React, { useContext } from 'react'
 import useGetDetails from './hooks/useGetDetails';
 
 import Box from '@mui/material/Box';
@@ -11,11 +11,28 @@ import { Button, CardContent, Typography } from '@mui/material';
 import Rating from '@mui/material/Rating';
 
 import { Actions } from './styles'
+import { AppContext } from '@/context/AppContext';
 
 const Details = () => {
+    const { store, setStore } = useContext(AppContext);
+
+    const { cartItems } = store || {};
+
     const params = useParams();
+
     const { data }= useGetDetails(params?.id);
     const { image, title, description, category, price, rating } = data || {};
+
+    const isAlreadyAdded = cartItems?.includes(data);
+
+    const handleRemoveFromCart = () => {
+        const filteredList = cartItems.filter((item) => item.id !== data.id)
+        
+        setStore((prev) => ({
+            ...prev,
+            cartItems: filteredList,
+        }));
+    };
 
     return (
         <Container maxWidth="lg">
@@ -48,7 +65,10 @@ const Details = () => {
                             {description}
                         </Typography>
                         <Actions>
-                            <Button variant="outlined">Add to Cart</Button>
+                            {isAlreadyAdded 
+                                ?<Button variant="outlined" onClick={handleRemoveFromCart}>Remove from Cart</Button> 
+                                :<Button variant="outlined" onClick={()=> setStore((prev)=> ({...prev, cartItems: [...prev.cartItems, data] }))}>Add to Cart</Button>
+                            }
                             <Button variant="contained">Go to Cart</Button>
                         </Actions>
                     </CardContent>
