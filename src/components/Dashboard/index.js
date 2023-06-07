@@ -3,13 +3,8 @@ import Products from "./Products";
 import useGetProductList from "./hooks/useGetProductList";
 import Categories from "./Categories";
 
-
-
 function Dashboard() {
   const {data} = useGetProductList();
-
-  console.log("sdhjsjj",data)
-
 
   return (
     <>

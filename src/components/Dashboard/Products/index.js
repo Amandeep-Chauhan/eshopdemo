@@ -4,38 +4,46 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
+import { Container } from '@mui/material';
+import { useRouter } from 'next/navigation';
 
 const Products = ({data}) => {
+
+  const { push } = useRouter();
+  
   return (
-<Grid container sx={{padding: '60px'}} >
+    <Container maxWidth='lg'>
+      <Grid container sx={{padding: '60px'}} >
         {(data || []).map((item)=>{
             const {image, id, price, title, rating } = item || {}
             return(
-                <Grid key={id} item xs={3.7} sx={{ padding: ' 12px 16px', margin: '16px', boxShadow: '0 3px 10px rgb(0 0 0 / 0.2)'}} >
+                <Grid onClick={()=> push(`/details/${id}`)} key={id} item xs={3.6} sx={{ padding: ' 12px 16px', margin: '16px', boxShadow: '0 3px 10px rgb(0 0 0 / 0.2)'}} >
                     <Box
-                component="div"
-                sx={{
-                  height: 500,
-                  backgroundImage: `url(${image})`,
-                  width: '100%',
-                  backgroundSize: 'contain',
-                  backgroundRepeat: 'no-repeat',
-                  backgroundPosition: 'center'
-                }}
-             />
-                <CardContent>
-                <Typography variant="h6" component="div" sx={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}>
-                  {title}
-                </Typography>
-                <Rating name="read-only" value={rating.rate} readOnly  />
-                <Typography variant="h5" color="text.secondary" sx={{marginTop: '8px'}}>
-                    $ {price}
-                </Typography>
-              </CardContent>
-            </Grid>
-            )
+                        component="div"
+                        sx={{
+                          height: 280,
+                          backgroundImage: `url(${image})`,
+                          width: '100%',
+                          backgroundSize: 'contain',
+                          backgroundRepeat: 'no-repeat',
+                          backgroundPosition: 'center'
+                        }}
+                    />
+                  <CardContent>
+                  <Typography variant="h6" component="div" sx={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}>
+                    {title}
+                  </Typography>
+                  <Rating name="read-only" value={rating.rate} readOnly  />
+                  <Typography variant="h5" color="text.secondary" sx={{marginTop: '8px'}}>
+                      $ {price}
+                  </Typography>
+                </CardContent>
+              </Grid>
+              )
         })}
-     </Grid>
+      </Grid>
+    </Container>
+
   );
 }
 
