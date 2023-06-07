@@ -1,34 +1,42 @@
-import { Box, Button, Container, Grid } from "@mui/material";
-import { products } from "../../Dashboard/constants/data";
-import SingleProduct from "./SingleProduct";
-import { useTheme } from "@mui/material/styles";
-import { useMediaQuery } from "@mui/material";
-import SingleProductDesktop from "./SingleProductDesktop";
+import * as React from 'react';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Rating from '@mui/material/Rating';
 
-export default function Products() {
-  const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down("md"));
-
-  const renderProducts = products.map((product) => (
-    <Grid item key={product.id} xs={2} sm={4} md={4} display="flex" flexDirection={'column'} alignItems="center">
-      {matches ? (
-        <SingleProduct product={product} matches={matches} />
-      ) : (
-        <SingleProductDesktop product={product} matches={matches} />
-      )}
-    </Grid>
-  ));
+const Products = ({data}) => {
   return (
-    <Container>
-      <Grid        
-        container
-        spacing={{ xs: 2, md: 3 }}
-        justifyContent="center"
-        sx={{ margin: `20px 4px 10px 4px` }}
-        columns={{ xs: 4, sm: 8, md: 12 }}
-      >
-        {renderProducts}
-      </Grid>
-    </Container>
+<Grid container sx={{padding: '60px'}} >
+        {(data || []).map((item)=>{
+            const {image, id, price, title, rating } = item || {}
+            return(
+                <Grid key={id} item xs={3.7} sx={{ padding: ' 12px 16px', margin: '16px', boxShadow: '0 3px 10px rgb(0 0 0 / 0.2)'}} >
+                    <Box
+                component="div"
+                sx={{
+                  height: 500,
+                  backgroundImage: `url(${image})`,
+                  width: '100%',
+                  backgroundSize: 'contain',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundPosition: 'center'
+                }}
+             />
+                <CardContent>
+                <Typography variant="h6" component="div" sx={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}>
+                  {title}
+                </Typography>
+                <Rating name="read-only" value={rating.rate} readOnly  />
+                <Typography variant="h5" color="text.secondary" sx={{marginTop: '8px'}}>
+                    $ {price}
+                </Typography>
+              </CardContent>
+            </Grid>
+            )
+        })}
+     </Grid>
   );
 }
+
+export default Products
