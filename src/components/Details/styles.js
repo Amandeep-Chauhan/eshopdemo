@@ -16,18 +16,3 @@ export const Actions = styled.div`
         background-color: #000;
     }
 `;
-
-export const ImageZoom = styled.div`
-    width: 500px;
-    background-repeat: no-repeat;
-
-    &:hover img {
-        opacity: 0;
-    }
-  
-    img {
-        display: block;
-        width: 100%;
-        pointer-events: none;
-    }
-`;

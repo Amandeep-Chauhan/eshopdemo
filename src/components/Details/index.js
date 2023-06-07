@@ -6,15 +6,16 @@ import useGetDetails from './hooks/useGetDetails';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import CardMedia from '@mui/material/CardMedia';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { Button, CardContent, Typography } from '@mui/material';
 import Rating from '@mui/material/Rating';
 
-import { Actions, ImageZoom } from './styles'
+import { Actions } from './styles'
 import { AppContext } from '@/context/AppContext';
 
 const Details = () => {
     const params = useParams();
+    const { push } = useRouter();
 
     const { store, setStore } = useContext(AppContext);
     const { cartItems } = store || {};
@@ -24,30 +25,13 @@ const Details = () => {
 
     const isAlreadyAdded = cartItems?.includes(data);
 
-    const [imageZoom, setImageZoom] = useState({
-        backgroundImage: `url(${image})`,
-        backgroundPosition: '0% 0%'
-      })
-
     const handleRemoveFromCart = () => {
         const filteredList = cartItems.filter((item) => item.id !== data.id)
-        
         setStore((prev) => ({
             ...prev,
             cartItems: filteredList,
         }));
     };
-
-    const handleMouseMove = e => {
-        const { left, top, width, height } = e.target.getBoundingClientRect()
-        const x = (e.pageX - left) / width * 150;
-        const y = (e.pageY - top) / height * 150;
-        setImageZoom({ backgroundImage: `url(${image})`, backgroundPosition: `${x}% ${y}%` })
-    }
-
-    const handleMouseOut = () => {
-        setImageZoom({})
-    }
 
     return (
         <Container maxWidth="lg">
@@ -55,14 +39,12 @@ const Details = () => {
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     width: '100%'}}>
-                    <ImageZoom onMouseMove={handleMouseMove} onMouseOut={handleMouseOut} style={imageZoom}>
                         <CardMedia
                             sx={{ width: '45%', height: 500, objectFit: "contain"  }}
                             component="img"
                             alt="Image"
                             image={image}
                         />
-                    </ImageZoom>
                     <CardContent sx={{ width: '50%' }}>
                         <Typography 
                             variant="h6" component="p" 
@@ -86,7 +68,7 @@ const Details = () => {
                                 ?<Button variant="outlined" onClick={handleRemoveFromCart}>Remove from Cart</Button> 
                                 :<Button variant="outlined" onClick={()=> setStore((prev)=> ({...prev, cartItems: [...prev.cartItems, data] }))}>Add to Cart</Button>
                             }
-                            <Button variant="contained">Go to Cart</Button>
+                            <Button variant="contained" onClick={()=> push('/cart')}>Go to Cart</Button>
                         </Actions>
                     </CardContent>
             </Box>
