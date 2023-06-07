@@ -5,22 +5,25 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Grid from '@mui/material/Grid';
-
+import {  useRouter } from 'next/navigation';
 
 const images = [
     {
       label: 'FASHION CLOTHING',
+      name: `men's clothing`,
       imgPath:
         'https://zwin.io/react/stoon/assets/img/collection/4.png',
     },
     {
       label: 'ACCESSORIES',
+      name: 'jewelery',
       imgPath:
         'https://zwin.io/react/stoon/assets/img/collection/5.png',
     },
   ];
 
 function Categories() {
+  const { push } = useRouter();
 
   return (
     <Grid container spacing={6} sx={{padding: '0px 60px', marginBottom: '40px'}}>
@@ -46,7 +49,7 @@ function Categories() {
                       <Typography sx={{fontWeight: '500', fontSize: '36px',  color: '#404040'}}>
                           {step.label}
                       </Typography>
-                      <Button sx={{marginTop: '24px', fontWeight: '400',letterSpacing: '0px',
+                      <Button onClick={()=> push(`categories/${step.name}`)} sx={{marginTop: '24px', fontWeight: '400',letterSpacing: '0px',
                       color: '#000', padding: '13px 35px', fontSize: '16px',  color: '#404040',
                       border: '1px solid #fff', background: '#fff'}} variant="contained"
                       >SHOP NOW
@@ -57,7 +60,7 @@ function Categories() {
 
           </Grid>
         ))}
-</Grid>
+      </Grid>
   );
 }
 
