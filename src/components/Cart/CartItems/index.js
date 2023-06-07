@@ -31,17 +31,6 @@ const CartItems = ({ item }) => {
     }
   };
 
-  const updateCartItems = cartItems.map((val) => {
-    if(val.id === item.id){
-         return { 
-            ...val,
-            quantity,
-            product_total: item.price * quantity,
-          };
-    }
-    return val;
-  })
-
   const isFavourite = wishList.filter((val) => val.id === item.id).length > 0;
 
   const handleAddToWishList = () => {
@@ -58,13 +47,20 @@ const CartItems = ({ item }) => {
     setStore((prev)=> ({...prev, cartItems: filteredItems }));
   }
 
-  const setCartData = useCallback(() => {
-      setStore((prev)=> ({...prev, cartItems: updateCartItems }))
-  }, [quantity])
+  const updateCartItems = cartItems.map((val) => {
+    if(val.id === item.id){
+         return { 
+            ...val,
+            quantity,
+            product_total: item.price * quantity,
+          };
+    };
+    return val;
+  })
   
   useEffect(() => {
-    setCartData();
-  }, [setCartData])
+    setStore((prev)=> ({...prev, cartItems: updateCartItems }))
+  }, [quantity])
 
   return (
     <Container container key={item.id}>
@@ -80,7 +76,7 @@ const CartItems = ({ item }) => {
       </Grid>
       <Grid item xs={4} sx={{ display:'flex', flexDirection: 'column', paddingLeft: '12px' }}>
       <Typography variant="overline" display="block" sx={{ textAlign: 'left', color: '#8d99ae'}}>
-        kjhghj
+        {item.category}
       </Typography>
         <Typography variant="overline" display="block" sx={{ lineHeight: '1.5', textAlign: 'left' }}>
         {item.title}
