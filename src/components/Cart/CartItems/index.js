@@ -97,7 +97,7 @@ const CartItems = ({ item }) => {
         </CountInput>
       </Grid>
       <Grid item xs={2} sx={{ display:'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <Item>$ {eval(item.price * quantity)}</Item>
+        <Item>INR {eval(item.price * quantity)}</Item>
       </Grid>
       <Grid item xs={2} sx={{ display:'flex', alignItems: 'center', justifyContent: 'center' }}>
         <Item>

@@ -43,16 +43,15 @@ const Cart = () => {
       key: "rzp_test_brNvd8q3AZOoId",
       currency: "INR",
       amount: amount * 100,
-      name: "My shop",
+      name: "StellarStore",
       description: "Thanks for purchasing",
       image: "",
 
       handler: function (response) {
-        alert(response.razorpay_payment_id);
-        alert("Payment Successfully");
+        alert("Payment Successfully", response.razorpay_payment_id);
       },
       prefill: {
-        name: "My shop",
+        name: "StellarStore",
       },
     };
 
@@ -64,12 +63,12 @@ const Cart = () => {
       <Container maxWidth="md" sx={{ border: '1px solid', borderRadius: "4px", marginTop: '20px', padding: '20px 0 12px 0' }}>
           {cartItems.map((item)=> <CartItems key={item?.id} item={item} />)}
           <Typography variant="h4" sx={{ textAlign: 'right' }}>
-              Total: $ {(totalAmount || 0).toFixed(2)}
+              Total: INR {(totalAmount || 0).toFixed(2)}
           </Typography>
 
-          <Button onClick={() => displayRazorpay('200')}>
+          <Button onClick={() => displayRazorpay(totalAmount|| '200')}>
                 BUY NOW
-        </Button>
+          </Button>
       </Container>
   );
 };

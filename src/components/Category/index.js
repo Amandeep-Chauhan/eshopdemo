@@ -19,7 +19,7 @@ const Category = () => {
         {(data || []).map((item)=>{
             const {image, id, price, title, rating } = item || {}
             return(
-                <Grid onClick={()=> push(`/details/${id}`)} key={id} item xs={3.7} sx={{ padding: ' 12px 16px', margin: '16px', boxShadow: '0 3px 10px rgb(0 0 0 / 0.2)'}} >
+                <Grid onClick={()=> push(`/details/${id}`)} key={id} item xs={3.7} sx={{ cursor: 'pointer', padding: ' 12px 16px', margin: '16px', boxShadow: '0 3px 10px rgb(0 0 0 / 0.2)'}} >
                     <Box
                 component="div"
                 sx={{
@@ -37,7 +37,7 @@ const Category = () => {
                 </Typography>
                 <Rating name="read-only" value={rating.rate} readOnly  />
                 <Typography variant="h5" color="text.secondary" sx={{marginTop: '8px'}}>
-                    $ {price}
+                INR {price}
                 </Typography>
               </CardContent>
             </Grid>

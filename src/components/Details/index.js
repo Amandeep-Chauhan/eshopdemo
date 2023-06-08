@@ -58,17 +58,24 @@ const Details = () => {
                        {rating?.rate && <Rating name="read-only" value={rating?.rate} precision={0.5} readOnly sx={{marginRight: "8px"}}/>} {rating?.rate} 
                         </Typography>
                         <Typography variant="h3" component="p"  sx={{marginBlock: '16px'}}>
-                            $ {price}
+                        INR {price}
                         </Typography>
                         <Typography variant="body1" component="p" sx={{color: '#6c757d', fontSize: '16px'}}>
                             {description}
                         </Typography>
                         <Actions>
                             {isAlreadyAdded 
-                                ?<Button variant="outlined" onClick={handleRemoveFromCart}>Remove from Cart</Button> 
-                                :<Button variant="outlined" onClick={()=> setStore((prev)=> ({...prev, cartItems: [...prev.cartItems, data] }))}>Add to Cart</Button>
+                                ?
+                                <div>
+                                    <Button sx={{  color: '#000', marginRight: '16px' }} variant="outlined" onClick={handleRemoveFromCart}>
+                                        Remove from Cart
+                                    </Button> 
+                                    <Button variant="contained" sx={{  color: '#fff', backgroundColor: '#000' }} onClick={()=> push('/cart')}>Go to Cart</Button>
+                                </div>
+                                :<Button sx={{  color: '#fff', backgroundColor: '#000' }} className='go_to_cart' variant="contained" onClick={()=> setStore((prev)=> ({...prev, cartItems: [...prev.cartItems, data] }))}>
+                                    Add to Cart
+                                </Button>
                             }
-                            <Button variant="contained" onClick={()=> push('/cart')}>Go to Cart</Button>
                         </Actions>
                     </CardContent>
             </Box>

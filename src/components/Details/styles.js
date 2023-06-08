@@ -7,6 +7,11 @@ export const Actions = styled.div`
         border-color: #000;
     }
 
+    .go_to_cart:hover{
+        background: #000;
+    }
+
+    /* 
     button:first-child{
         color: #000;
         margin-right: 16px;
@@ -14,5 +19,6 @@ export const Actions = styled.div`
 
     button:last-child{
         background-color: #000;
-    }
+    } 
+    */
 `;

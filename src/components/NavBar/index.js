@@ -18,7 +18,7 @@ const NavBar = () => {
 
     return (
       <Container>
-          <Typography variant="h5" onClick={()=> push('/dashboard')}>E-shop</Typography>
+          <Typography variant="h4" onClick={()=> push('/dashboard')}>StellarStore</Typography>
 
           <Badge badgeContent={addedItemsCount} color="primary">
               <Button  variant="text" startIcon={<LocalMallIcon/>} onClick={()=> push('/cart')} sx={{border: '.5px solid #000', color: '#000'}}>Cart</Button>
