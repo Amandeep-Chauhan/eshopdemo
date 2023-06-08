@@ -66,7 +66,7 @@ const Cart = () => {
               Total: INR {(totalAmount || 0).toFixed(2)}
           </Typography>
 
-          <Button onClick={() => displayRazorpay(totalAmount|| '200')}>
+          <Button onClick={() => displayRazorpay(totalAmount || '200')}>
                 BUY NOW
           </Button>
       </Container>
